@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Nunito', sans-serif;
+  }
+}
+
+.font-script {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-serif-title {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-arabic {
+  font-family: 'Amiri', serif;
+}
+
+/* Gold foil metallic shimmering text effect */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #B38728 0%, #FBF5B7 25%, #DAA520 50%, #AA771C 75%, #E6CA65 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #C59B27 0%, #DFBA52 35%, #FBF5B7 50%, #C59B27 70%, #9B7013 100%);
+}
+
+.bg-gold-subtle {
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.08) 0%, rgba(251, 245, 183, 0.25) 50%, rgba(170, 119, 28, 0.08) 100%);
+}
+
+.border-gold-ornate {
+  border-color: #D4AF37;
+}
+
+/* Floating petals and stardust */
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-20vh) rotate(360deg) scale(1.1);
+    opacity: 0;
+  }
+}
+
+.petal-particle {
+  position: absolute;
+  pointer-events: none;
+  animation: floatUp 14s linear infinite;
+}
+
+/* Envelope opening 3D perspective */
+.perspective-1000 {
+  perspective: 1000px;
+}

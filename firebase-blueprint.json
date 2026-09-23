@@ -1,0 +1,76 @@
+{
+  "entities": {
+    "settings": {
+      "title": "Site Settings",
+      "description": "Wedding settings and content editable from admin panel",
+      "type": "object",
+      "properties": {
+        "brideName": { "type": "string" },
+        "groomName": { "type": "string" },
+        "brideFamily": { "type": "string" },
+        "groomFamily": { "type": "string" },
+        "weddingDate": { "type": "string" },
+        "invitationText": { "type": "string" },
+        "musicUrl": { "type": "string" },
+        "musicAutoplayPrompt": { "type": "boolean" },
+        "rsvpDeadline": { "type": "string" },
+        "rsvpEnabled": { "type": "boolean" },
+        "messagesRequireApproval": { "type": "boolean" },
+        "contactPhone": { "type": "string" },
+        "parkingInfo": { "type": "string" },
+        "ibanInfo": { "type": "string" },
+        "ibanName": { "type": "string" },
+        "showGiftSection": { "type": "boolean" },
+        "ourStory": { "type": "string" },
+        "bridePhotoUrl": { "type": "string" },
+        "groomPhotoUrl": { "type": "string" },
+        "couplePhotoUrl": { "type": "string" },
+        "gallery": { "type": "array" }
+      }
+    },
+    "rsvps": {
+      "title": "RSVP Responses",
+      "description": "Guest RSVP attendance records",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "attendance": { "type": "string", "enum": ["attending", "not_attending", "undecided"] },
+        "eventChoice": { "type": "string", "enum": ["both", "wedding", "henna"] },
+        "adultCount": { "type": "number" },
+        "childCount": { "type": "number" },
+        "phone": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "guestSlug": { "type": "string" }
+      },
+      "required": ["fullName", "attendance", "eventChoice", "adultCount", "childCount", "createdAt"]
+    },
+    "guestList": {
+      "title": "Invited Guest List",
+      "description": "Managed list of invited guests to send custom personalized links",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "category": { "type": "string" },
+        "hasResponded": { "type": "boolean" },
+        "responseStatus": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "createdAt"]
+    },
+    "messages": {
+      "title": "Wishes and Congratulations Wall",
+      "description": "Public guest wishes and prayers",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["approved", "pending", "hidden"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["fullName", "message", "status", "createdAt"]
+    }
+  }
+}

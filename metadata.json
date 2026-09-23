@@ -1,0 +1,6 @@
+{
+  "name": "Minel & Muhammed Düğün Davetiyesi",
+  "description": "Minel & Muhammed online nikâh ve düğün davetiyesi, LCV (RSVP) ve tebrik defteri.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

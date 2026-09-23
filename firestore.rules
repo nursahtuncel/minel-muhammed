@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Admin check: checks against custom claim or user email if authenticated
+    function isAdmin() {
+      return request.auth != null && (
+        request.auth.token.email == "nursahtuncell@gmail.com" ||
+        request.auth.token.email.matches('(?i)^nursahtuncell@gmail\\.com$') ||
+        request.auth.token.admin == true
+      );
+    }
+
+    // Site settings: everyone can read, only admin can write
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // RSVPs: Anyone can create with valid fields and limits, only admin can read all, update or delete
+    match /rsvps/{rsvpId} {
+      allow create: if request.resource.data.fullName is string
+                    && request.resource.data.fullName.size() >= 2
+                    && request.resource.data.fullName.size() <= 100
+                    && request.resource.data.attendance in ['attending', 'not_attending', 'undecided']
+                    && request.resource.data.adultCount is number
+                    && request.resource.data.adultCount >= 0
+                    && request.resource.data.adultCount <= 20
+                    && request.resource.data.childCount is number
+                    && request.resource.data.childCount >= 0
+                    && request.resource.data.childCount <= 20;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Messages / Guestbook:
+    // Anyone can create a message if it has name, message length <= 500
+    // Public can read messages only if status == 'approved'
+    // Admin can read all (approved, pending, hidden), update and delete
+    match /messages/{messageId} {
+      allow create: if request.resource.data.fullName is string
+                    && request.resource.data.fullName.size() >= 2
+                    && request.resource.data.fullName.size() <= 100
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() >= 1
+                    && request.resource.data.message.size() <= 600
+                    && request.resource.data.status in ['approved', 'pending', 'hidden'];
+      allow read: if resource.data.status == 'approved' || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // Guest List (Davetli Listesi): Only admin can read and write
+    match /guestList/{guestId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
